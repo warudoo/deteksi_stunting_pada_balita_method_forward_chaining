@@ -1,131 +1,70 @@
 <?php
-// Mulai session
 session_start();
 
-// --- PENJAGA HALAMAN ---
-// Cek apakah user sudah login atau belum.
-// Jika tidak ada session id_user, maka user belum login
 if (!isset($_SESSION['id_user'])) {
-    // Arahkan ke halaman login
     header("Location: login.php");
-    exit(); // Hentikan script
+    exit();
 }
 
-// Masukkan file koneksi database
 require 'config/database.php';
-
-// Ambil ID user dari session
 $id_user = $_SESSION['id_user'];
 
-// Query untuk mengambil semua data balita milik user yang sedang login
 $query_balita = "SELECT id_balita, nama_balita, tanggal_lahir, jenis_kelamin FROM balita WHERE id_user = $id_user";
 $result_balita = mysqli_query($koneksi, $query_balita);
-
 ?>
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - Aplikasi Diagnosis Stunting</title>
-    <link rel="stylesheet" href="assets/style.css">
-    <style>
-        .header {
-            background-color: #fff;
-            padding: 15px 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #2c3e50;
-        }
-        .header a {
-            text-decoration: none;
-            color: #3498db;
-            font-weight: 500;
-        }
-        .balita-card {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-        }
-        .balita-card h3 {
-            margin-top: 0;
-            color: #34495e;
-        }
-        .balita-card p {
-            margin: 5px 0;
-            color: #555;
-            text-align: left;
-        }
-        .btn-group {
-            margin-top: 15px;
-        }
-        .btn-small {
-            padding: 8px 15px;
-            font-size: 14px;
-            margin-right: 10px;
-            text-decoration: none;
-            display: inline-block;
-        }
-    </style>
+    <link rel="stylesheet" href="src/output.css"> <!-- File hasil build Tailwind -->
 </head>
-<body>
+<body class="bg-gray-100 min-h-screen px-4 py-6">
 
-    <div class="container">
+    <div class="max-w-4xl mx-auto space-y-6">
         
-        <header class="header">
-            <h1>Selamat Datang, <?php echo htmlspecialchars($_SESSION['nama_lengkap_user']); ?>!</h1>
-            <a href="logout.php">Logout</a>
+        <!-- Header -->
+        <header class="bg-white shadow-md rounded-lg px-6 py-4 flex justify-between items-center">
+            <h1 class="text-xl font-semibold text-gray-800">
+                Selamat Datang, <?php echo htmlspecialchars($_SESSION['nama_lengkap_user']); ?>!
+            </h1>
+            <a href="logout.php" class="text-blue-600 hover:underline font-medium">Logout</a>
         </header>
 
+        <!-- Main content -->
         <main>
-            <h2>Data Balita Anda</h2>
+            <h2 class="text-lg font-semibold text-gray-700 mb-4">Data Balita Anda</h2>
 
-            <?php 
-            // Cek apakah user memiliki data balita
-            if (mysqli_num_rows($result_balita) > 0) :
-                // Jika ada, loop dan tampilkan setiap data balita
-                while ($balita = mysqli_fetch_assoc($result_balita)) :
-                    // Menghitung umur balita dari tanggal lahir
+            <?php if (mysqli_num_rows($result_balita) > 0): ?>
+                <?php while ($balita = mysqli_fetch_assoc($result_balita)) :
                     $tgl_lahir = new DateTime($balita['tanggal_lahir']);
                     $hari_ini = new DateTime('today');
                     $umur = $hari_ini->diff($tgl_lahir);
-            ?>
-
-                <div class="balita-card">
-                    <h3><?php echo htmlspecialchars($balita['nama_balita']); ?></h3>
-                    <p><strong>Tanggal Lahir:</strong> <?php echo date('d F Y', strtotime($balita['tanggal_lahir'])); ?></p>
-                    <p><strong>Jenis Kelamin:</strong> <?php echo $balita['jenis_kelamin']; ?></p>
-                    <p><strong>Usia:</strong> <?php echo $umur->y . ' tahun, ' . $umur->m . ' bulan, ' . $umur->d . ' hari'; ?></p>
-                    <div class="btn-group">
-                        <a href="diagnosis.php?id_balita=<?php echo $balita['id_balita']; ?>" class="btn btn-small">Mulai Diagnosis</a>
-                        <a href="riwayat.php?id_balita=<?php echo $balita['id_balita']; ?>" class="btn btn-small" style="background-color: #95a5a6;">Lihat Riwayat</a>
+                ?>
+                <div class="bg-white rounded-lg shadow p-6 mb-4">
+                    <h3 class="text-xl font-bold text-gray-800"><?php echo htmlspecialchars($balita['nama_balita']); ?></h3>
+                    <p class="text-gray-600 mt-1"><span class="font-semibold">Tanggal Lahir:</span> <?php echo date('d F Y', strtotime($balita['tanggal_lahir'])); ?></p>
+                    <p class="text-gray-600"><span class="font-semibold">Jenis Kelamin:</span> <?php echo $balita['jenis_kelamin']; ?></p>
+                    <p class="text-gray-600"><span class="font-semibold">Usia:</span> <?php echo $umur->y . ' tahun, ' . $umur->m . ' bulan, ' . $umur->d . ' hari'; ?></p>
+                    <div class="mt-4 space-x-2">
+                        <a href="diagnosis.php?id_balita=<?php echo $balita['id_balita']; ?>" class="inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm font-medium">Mulai Diagnosis</a>
+                        <a href="riwayat.php?id_balita=<?php echo $balita['id_balita']; ?>" class="inline-block bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600 text-sm font-medium">Lihat Riwayat</a>
                     </div>
                 </div>
+                <?php endwhile; ?>
 
-            <?php 
-                endwhile;
-            else: 
-                // Jika tidak ada data balita
-            ?>
-                <div class="balita-card">
-                    <p>Anda belum memiliki data balita. Silakan tambahkan data balita terlebih dahulu.</p>
-                    <a href="tambah_balita.php" class="btn btn-small">Tambah Data Balita</a>
+            <?php else: ?>
+                <div class="bg-white rounded-lg shadow p-6">
+                    <p class="text-gray-600">Anda belum memiliki data balita. Silakan tambahkan data balita terlebih dahulu.</p>
+                    <a href="tambah_balita.php" class="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 text-sm font-medium">Tambah Data Balita</a>
                 </div>
             <?php endif; ?>
 
         </main>
 
     </div>
-    
+
 </body>
 </html>
