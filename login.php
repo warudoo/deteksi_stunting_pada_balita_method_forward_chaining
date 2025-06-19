@@ -2,9 +2,13 @@
 // Memulai session di PHP. Ini harus ada di paling atas halaman.
 session_start();
 
-// Jika user sudah login, arahkan langsung ke dashboard
+// Jika user sudah login, kita juga perlu memeriksa rolenya untuk redirect yang benar
 if (isset($_SESSION['id_user'])) {
-    header("Location: dashboard.php");
+    if ($_SESSION['role'] == 'admin') {
+        header("Location: admin/dashboard_admin.php");
+    } else {
+        header("Location: dashboard.php");
+    }
     exit(); // Pastikan script berhenti setelah redirect
 }
 
@@ -34,7 +38,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user = mysqli_fetch_assoc($result);
 
             // Verifikasi password yang diinput dengan hash password di database
-            // Ini adalah cara yang aman untuk memeriksa password
             if (password_verify($password, $user['password'])) {
                 // Jika password cocok, simpan informasi user ke dalam session
                 $_SESSION['id_user'] = $user['id_user'];
@@ -42,9 +45,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION['nama_lengkap_user'] = $user['nama_lengkap_user'];
                 $_SESSION['role'] = $user['role'];
 
-                // Arahkan user ke halaman dashboard
-                header("Location: dashboard.php");
-                exit(); // Hentikan script
+
+                
+                if ($_SESSION['role'] == 'admin') {
+                    // Jika rolenya adalah admin, arahkan ke dashboard admin
+                    header("Location: admin/dashboard_admin.php");
+                } else {
+                    // Jika rolenya adalah user biasa, arahkan ke dashboard user
+                    header("Location: dashboard.php");
+                }
+                exit(); // Hentikan script setelah redirect
+
             } else {
                 // Jika password salah
                 $error = "Password yang Anda masukkan salah.";

@@ -114,7 +114,7 @@ $recent_diagnosis_query = mysqli_query($koneksi,
         <section class="content-section">
             <h2>Menu Manajemen</h2>
             <div class="nav-grid">
-                <a href="kelola_pengguna.php" class="nav-card">
+                <a href="kelola_aturan.php" class="nav-card">
                     <div class="icon">👤</div>
                     <div class="title">Kelola Pengguna</div>
                     <p>Tambah, edit, atau hapus data admin dan user.</p>
