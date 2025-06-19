@@ -112,6 +112,7 @@ $recent_diagnosis_query = mysqli_query($koneksi,
         </section>
 
         <section class="content-section">
+            
             <h2>Menu Manajemen</h2>
             <div class="nav-grid">
                 <a href="kelola_pengguna.php" class="nav-card">

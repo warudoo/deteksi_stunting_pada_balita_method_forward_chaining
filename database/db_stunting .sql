@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2025 at 12:21 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Waktu pembuatan: 19 Jun 2025 pada 18.35
+-- Versi server: 10.4.32-MariaDB
+-- Versi PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `aturan`
+-- Struktur dari tabel `aturan`
 --
 
 CREATE TABLE `aturan` (
@@ -35,7 +35,7 @@ CREATE TABLE `aturan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `aturan`
+-- Dumping data untuk tabel `aturan`
 --
 
 INSERT INTO `aturan` (`id_aturan`, `kode_aturan`, `kondisi`, `kesimpulan`) VALUES
@@ -46,7 +46,7 @@ INSERT INTO `aturan` (`id_aturan`, `kode_aturan`, `kondisi`, `kesimpulan`) VALUE
 -- --------------------------------------------------------
 
 --
--- Table structure for table `balita`
+-- Struktur dari tabel `balita`
 --
 
 CREATE TABLE `balita` (
@@ -59,16 +59,17 @@ CREATE TABLE `balita` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `balita`
+-- Dumping data untuk tabel `balita`
 --
 
 INSERT INTO `balita` (`id_balita`, `id_user`, `nama_balita`, `tanggal_lahir`, `jenis_kelamin`, `alamat`) VALUES
-(1, 1, 'Hafidza', '2025-06-04', 'Perempuan', '');
+(3, 3, 'Hafidza', '2025-02-19', 'Perempuan', ''),
+(4, 7, 'Hafidza', '2023-03-22', 'Perempuan', '');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `hasil_diagnosis`
+-- Struktur dari tabel `hasil_diagnosis`
 --
 
 CREATE TABLE `hasil_diagnosis` (
@@ -81,18 +82,17 @@ CREATE TABLE `hasil_diagnosis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `hasil_diagnosis`
+-- Dumping data untuk tabel `hasil_diagnosis`
 --
 
 INSERT INTO `hasil_diagnosis` (`id_hasil`, `id_balita`, `jawaban`, `kesimpulan_akhir`, `tanggal_diagnosis`, `catatan_usia_saat_diagnosis`) VALUES
-(1, 1, '{\"G01\":\"ya\",\"G02\":\"ya\",\"G03\":\"ya\",\"G04\":\"ya\",\"G05\":\"ya\"}', 'Terindikasi Stunting', '2025-06-18 04:45:46', 0),
-(2, 1, '{\"G01\":\"ya\",\"G02\":\"ya\",\"G03\":\"ya\",\"G04\":\"ya\",\"G05\":\"ya\"}', 'Terindikasi Stunting', '2025-06-18 04:57:12', 0),
-(3, 1, '{\"G01\":\"tidak\",\"G02\":\"tidak\",\"G03\":\"tidak\",\"G04\":\"tidak\",\"G05\":\"tidak\"}', 'Normal / Tidak Terindikasi Masalah Stunting', '2025-06-18 04:57:28', 0);
+(4, 4, '{\"G01\":\"tidak\",\"G02\":\"tidak\",\"G03\":\"tidak\",\"G04\":\"tidak\",\"G05\":\"tidak\",\"g09\":\"tidak\"}', 'Normal / Tidak Terindikasi Masalah Stunting', '2025-06-19 15:41:02', 26),
+(5, 4, '{\"G01\":\"ya\",\"G02\":\"ya\",\"G03\":\"tidak\",\"G04\":\"tidak\",\"G05\":\"ya\",\"g09\":\"ya\"}', 'Terindikasi Stunting', '2025-06-19 15:41:21', 26);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pertanyaan`
+-- Struktur dari tabel `pertanyaan`
 --
 
 CREATE TABLE `pertanyaan` (
@@ -102,7 +102,7 @@ CREATE TABLE `pertanyaan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `pertanyaan`
+-- Dumping data untuk tabel `pertanyaan`
 --
 
 INSERT INTO `pertanyaan` (`id_pertanyaan`, `kode_gejala`, `teks_pertanyaan`) VALUES
@@ -110,12 +110,13 @@ INSERT INTO `pertanyaan` (`id_pertanyaan`, `kode_gejala`, `teks_pertanyaan`) VAL
 (2, 'G02', 'Apakah tinggi badan anak terlihat lebih pendek dibandingkan anak seusianya?'),
 (3, 'G03', 'Apakah anak sering sakit atau mudah terkena infeksi (lebih dari 3 kali dalam setahun)?'),
 (4, 'G04', 'Apakah anak terlihat lesu, tidak aktif, dan cenderung lebih pendiam?'),
-(5, 'G05', 'Apakah perkembangan kemampuan bicara atau motorik anak tampak terlambat?');
+(5, 'G05', 'Apakah perkembangan kemampuan bicara atau motorik anak tampak terlambat?'),
+(7, 'g09', 'apakah bayi anda hitam?\\r\\n');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Struktur dari tabel `users`
 --
 
 CREATE TABLE `users` (
@@ -129,46 +130,48 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `users`
+-- Dumping data untuk tabel `users`
 --
 
 INSERT INTO `users` (`id_user`, `username`, `email`, `password`, `nama_lengkap_user`, `role`, `tanggal_registrasi`) VALUES
-(1, 'Warud', 'muhammadsalwarud@gmail.com', '$2y$10$VzGcLaTaW9sNw2HqEk9vKe5yIT/5Xk8z1mWA43y/5gVu2418h7NcK', 'Warud', 'admin', '2025-06-18 04:40:08');
+(3, 'admin', 'warudssss@gmail.com', '$2y$10$Pb6TGtyEyK/z0wa0FvZHLuti6jfT0vDlU2ZM3IB1LrTtyJxCeqFGe', 'admin', 'admin', '2025-06-19 15:02:03'),
+(6, 'Warud', 'ruhamaevent@gmail.com', '$2y$10$jJyB6OYHXbF0pbSXuRYVr.cL6WC0U3zhaUxsXKbeERWKZylj1zfBi', 'Warud', 'admin', '2025-06-19 15:22:25'),
+(7, 'mpii', 'muhammadsalwarud@gmail.com', '$2y$10$hJWYL7mxu03rO4/Vy2DXXemcJBgAgp0GrRV7pJ3K4JdzvT4qVc9ve', 'mpii', 'user', '2025-06-19 15:40:41');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `aturan`
+-- Indeks untuk tabel `aturan`
 --
 ALTER TABLE `aturan`
   ADD PRIMARY KEY (`id_aturan`),
   ADD UNIQUE KEY `kode_aturan` (`kode_aturan`);
 
 --
--- Indexes for table `balita`
+-- Indeks untuk tabel `balita`
 --
 ALTER TABLE `balita`
   ADD PRIMARY KEY (`id_balita`),
   ADD KEY `id_user` (`id_user`);
 
 --
--- Indexes for table `hasil_diagnosis`
+-- Indeks untuk tabel `hasil_diagnosis`
 --
 ALTER TABLE `hasil_diagnosis`
   ADD PRIMARY KEY (`id_hasil`),
   ADD KEY `id_balita` (`id_balita`);
 
 --
--- Indexes for table `pertanyaan`
+-- Indeks untuk tabel `pertanyaan`
 --
 ALTER TABLE `pertanyaan`
   ADD PRIMARY KEY (`id_pertanyaan`),
   ADD UNIQUE KEY `kode_gejala` (`kode_gejala`);
 
 --
--- Indexes for table `users`
+-- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id_user`),
@@ -176,51 +179,51 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT untuk tabel yang dibuang
 --
 
 --
--- AUTO_INCREMENT for table `aturan`
+-- AUTO_INCREMENT untuk tabel `aturan`
 --
 ALTER TABLE `aturan`
   MODIFY `id_aturan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `balita`
+-- AUTO_INCREMENT untuk tabel `balita`
 --
 ALTER TABLE `balita`
-  MODIFY `id_balita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_balita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `hasil_diagnosis`
+-- AUTO_INCREMENT untuk tabel `hasil_diagnosis`
 --
 ALTER TABLE `hasil_diagnosis`
-  MODIFY `id_hasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_hasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT for table `pertanyaan`
+-- AUTO_INCREMENT untuk tabel `pertanyaan`
 --
 ALTER TABLE `pertanyaan`
-  MODIFY `id_pertanyaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pertanyaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `balita`
+-- Ketidakleluasaan untuk tabel `balita`
 --
 ALTER TABLE `balita`
   ADD CONSTRAINT `balita_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
--- Constraints for table `hasil_diagnosis`
+-- Ketidakleluasaan untuk tabel `hasil_diagnosis`
 --
 ALTER TABLE `hasil_diagnosis`
   ADD CONSTRAINT `hasil_diagnosis_ibfk_1` FOREIGN KEY (`id_balita`) REFERENCES `balita` (`id_balita`) ON DELETE CASCADE ON UPDATE CASCADE;
