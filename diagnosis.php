@@ -27,10 +27,10 @@ $data_balita = mysqli_fetch_assoc($result_cek);
 $query_pertanyaan = "SELECT id_pertanyaan, kode_gejala, teks_pertanyaan FROM pertanyaan ORDER BY id_pertanyaan";
 $result_pertanyaan = mysqli_query($koneksi, $query_pertanyaan);
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
+<<<<<<< Updated upstream
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mulai Diagnosis - Aplikasi Diagnosis Stunting</title>
@@ -69,5 +69,40 @@ $result_pertanyaan = mysqli_query($koneksi, $query_pertanyaan);
         </form>
     </div>
 
+=======
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnosis Stunting</title>
+  <link href="src/output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen px-4 py-6">
+  <div class="max-w-3xl mx-auto bg-white p-6 rounded-lg shadow space-y-4">
+    <h2 class="text-2xl font-bold text-gray-800">Diagnosis Stunting</h2>
+    <p class="text-sm text-gray-700">Untuk Balita: <strong><?php echo htmlspecialchars($data_balita['nama_balita']); ?></strong></p>
+    <p class="text-sm text-gray-600">Jawab semua pertanyaan di bawah ini sesuai dengan kondisi balita.</p>
+
+    <form action="proses_diagnosis.php?id_balita=<?php echo $id_balita; ?>" method="POST" class="space-y-4">
+      <?php while ($pertanyaan = mysqli_fetch_assoc($result_pertanyaan)) : ?>
+        <div class="bg-gray-50 border border-gray-200 p-4 rounded shadow-sm">
+          <p class="font-medium text-gray-800 mb-2"><?php echo htmlspecialchars($pertanyaan['teks_pertanyaan']); ?></p>
+          <div class="flex items-center space-x-6 text-sm text-gray-700">
+            <label class="inline-flex items-center">
+              <input type="radio" name="jawaban[<?php echo $pertanyaan['kode_gejala']; ?>]" value="ya" required class="text-blue-600 focus:ring-blue-500">
+              <span class="ml-2">Ya</span>
+            </label>
+            <label class="inline-flex items-center">
+              <input type="radio" name="jawaban[<?php echo $pertanyaan['kode_gejala']; ?>]" value="tidak" required class="text-blue-600 focus:ring-blue-500">
+              <span class="ml-2">Tidak</span>
+            </label>
+          </div>
+        </div>
+      <?php endwhile; ?>
+
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 font-medium">
+        Lihat Hasil Diagnosis
+      </button>
+    </form>
+  </div>
+>>>>>>> Stashed changes
 </body>
 </html>

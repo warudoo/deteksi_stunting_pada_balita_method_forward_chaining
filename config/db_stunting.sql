@@ -3,7 +3,11 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
+<<<<<<< Updated upstream:config/db_stunting.sql
 -- Generation Time: Jun 19, 2025 at 03:47 PM
+=======
+-- Generation Time: Jun 19, 2025 at 07:24 PM
+>>>>>>> Stashed changes:database/db_stunting.sql
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.4.5
 
@@ -41,7 +45,8 @@ CREATE TABLE `aturan` (
 INSERT INTO `aturan` (`id_aturan`, `kode_aturan`, `kondisi`, `kesimpulan`) VALUES
 (1, 'R01', 'G01 AND G02', 'K01'),
 (2, 'R02', 'G03 AND G04', 'K03'),
-(3, 'R03', 'K01 AND G05', 'K02');
+(3, 'R03', 'K01 AND G05', 'K02'),
+(4, 'R04', 'G01 AND G08', 'K01');
 
 -- --------------------------------------------------------
 
@@ -63,8 +68,12 @@ CREATE TABLE `balita` (
 --
 
 INSERT INTO `balita` (`id_balita`, `id_user`, `nama_balita`, `tanggal_lahir`, `jenis_kelamin`, `alamat`) VALUES
+<<<<<<< Updated upstream:config/db_stunting.sql
 (1, 2, 'Tiara', '2025-06-19', 'Perempuan', 'Jl. Pamulang'),
 (2, 3, 'Indhira', '2020-12-16', 'Perempuan', 'Jl. Populis');
+=======
+(1, 2, 'Tiara', '2024-02-12', 'Perempuan', 'Jl. Pamulang Raya');
+>>>>>>> Stashed changes:database/db_stunting.sql
 
 -- --------------------------------------------------------
 
@@ -80,6 +89,7 @@ CREATE TABLE `hasil_diagnosis` (
   `tanggal_diagnosis` timestamp NOT NULL DEFAULT current_timestamp(),
   `catatan_usia_saat_diagnosis` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+<<<<<<< Updated upstream:config/db_stunting.sql
 
 --
 -- Dumping data for table `hasil_diagnosis`
@@ -97,6 +107,8 @@ INSERT INTO `hasil_diagnosis` (`id_hasil`, `id_balita`, `jawaban`, `kesimpulan_a
 (9, 2, '{\"G01\":\"ya\",\"G02\":\"ya\",\"G03\":\"tidak\",\"G04\":\"tidak\",\"G05\":\"ya\"}', 'Terindikasi Stunting', '2025-06-19 13:41:26', 54);
 
 -- --------------------------------------------------------
+=======
+>>>>>>> Stashed changes:database/db_stunting.sql
 
 --
 -- Table structure for table `pertanyaan`
@@ -117,7 +129,8 @@ INSERT INTO `pertanyaan` (`id_pertanyaan`, `kode_gejala`, `teks_pertanyaan`) VAL
 (2, 'G02', 'Apakah tinggi badan anak terlihat lebih pendek dibandingkan anak seusianya?'),
 (3, 'G03', 'Apakah anak sering sakit atau mudah terkena infeksi (lebih dari 3 kali dalam setahun)?'),
 (4, 'G04', 'Apakah anak terlihat lesu, tidak aktif, dan cenderung lebih pendiam?'),
-(5, 'G05', 'Apakah perkembangan kemampuan bicara atau motorik anak tampak terlambat?');
+(5, 'G05', 'Apakah perkembangan kemampuan bicara atau motorik anak tampak terlambat?'),
+(7, 'G08', 'HITAM ?');
 
 -- --------------------------------------------------------
 
@@ -140,9 +153,14 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id_user`, `username`, `email`, `password`, `nama_lengkap_user`, `role`, `tanggal_registrasi`) VALUES
+<<<<<<< Updated upstream:config/db_stunting.sql
 (1, 'admin', 'admin@gmail.com', '$2a$10$QGyMYQKhcRgqZDPO1aqp3O5/mgYCnsCZHo4tFKcW/KLcF55gXRjaG', 'Admin', 'admin', '2025-06-19 13:30:21'),
 (2, 'user', 'user@gmail.com', '$2y$12$JvbeOo9zKo9RoasGEgJiFOhBAQWsqM3VGjIVAxz.0yHvM8sLYwipa', 'user', 'user', '2025-06-19 13:32:39'),
 (3, 'jasmine', 'jasmine@gmail.com', '$2y$12$cSvmjCz6a1BB9uP9tGshauWnAZh4arcI/W2Cq.D7QO.rkU4cayqNC', 'Jasmine', 'user', '2025-06-19 13:38:14');
+=======
+(1, 'admin', 'admin@gmail.com', '$2y$12$tWZ.YRVEHq2kxsXQhpFUfueJtVPXvLvrE5zthOeVHkY6lN2ABamt2', 'admin', 'admin', '2025-06-19 17:02:01'),
+(2, 'user', 'user@gmail.com', '$2y$12$hrni5haZcgpt.DIehEzvcO8IFljbXDbers0jHmUZLUGVEj27BFZFe', 'user', 'user', '2025-06-19 17:02:49');
+>>>>>>> Stashed changes:database/db_stunting.sql
 
 --
 -- Indexes for dumped tables
@@ -192,7 +210,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `aturan`
 --
 ALTER TABLE `aturan`
-  MODIFY `id_aturan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_aturan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `balita`
@@ -204,19 +222,43 @@ ALTER TABLE `balita`
 -- AUTO_INCREMENT for table `hasil_diagnosis`
 --
 ALTER TABLE `hasil_diagnosis`
+<<<<<<< Updated upstream:config/db_stunting.sql
   MODIFY `id_hasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+=======
+  MODIFY `id_hasil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+>>>>>>> Stashed changes:database/db_stunting.sql
 
 --
 -- AUTO_INCREMENT for table `pertanyaan`
 --
 ALTER TABLE `pertanyaan`
-  MODIFY `id_pertanyaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_pertanyaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
+<<<<<<< Updated upstream:config/db_stunting.sql
   MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+=======
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `balita`
+--
+ALTER TABLE `balita`
+  ADD CONSTRAINT `balita_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `users` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `hasil_diagnosis`
+--
+ALTER TABLE `hasil_diagnosis`
+  ADD CONSTRAINT `hasil_diagnosis_ibfk_1` FOREIGN KEY (`id_balita`) REFERENCES `balita` (`id_balita`) ON DELETE CASCADE ON UPDATE CASCADE;
+>>>>>>> Stashed changes:database/db_stunting.sql
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = mysqli_real_escape_string($koneksi, $_POST['email']);
     $password = $_POST['password'];
     $nama_lengkap_user = mysqli_real_escape_string($koneksi, $_POST['nama_lengkap_user']);
-    
+
     $nama_balita = mysqli_real_escape_string($koneksi, $_POST['nama_balita']);
     $tanggal_lahir = $_POST['tanggal_lahir'];
     $jenis_kelamin = $_POST['jenis_kelamin'];
@@ -37,7 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             } else {
                 mysqli_rollback($koneksi);
+<<<<<<< Updated upstream
                 if (mysqli_errno($koneksi) == 1062) {
+=======
+                if(mysqli_errno($koneksi) == 1062) {
+>>>>>>> Stashed changes
                     $error = "Username atau Email sudah terdaftar. Silakan gunakan yang lain.";
                 } else {
                     $error = "Terjadi kesalahan saat mendaftarkan user: " . mysqli_error($koneksi);
@@ -47,17 +51,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_rollback($koneksi);
             $error = "Terjadi kesalahan pada database: " . $e->getMessage();
         }
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         mysqli_close($koneksi);
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Registrasi - Aplikasi Diagnosis Stunting</title>
+<<<<<<< Updated upstream
   <link rel="stylesheet" href="src/output.css">
 </head>
 <body class="bg-gray-100 min-h-screen flex items-center justify-center px-4">
@@ -139,6 +147,75 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       </p>
     </form>
   </div>
+=======
+  <link href="src/output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 py-8 px-4">
+  <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold text-center text-gray-800">Registrasi Akun</h2>
+    <p class="text-sm text-center text-gray-600 mb-4">Daftarkan akun Anda dan data balita Anda.</p>
 
+    <?php if(!empty($message)): ?>
+      <div class="bg-green-100 text-green-700 px-4 py-3 rounded mb-4 text-sm"><?php echo $message; ?></div>
+    <?php endif; ?>
+    <?php if(!empty($error)): ?>
+      <div class="bg-red-100 text-red-700 px-4 py-3 rounded mb-4 text-sm"><?php echo $error; ?></div>
+    <?php endif; ?>
+
+    <form action="register.php" method="POST" class="space-y-6">
+      <fieldset class="border border-gray-300 p-4 rounded">
+        <legend class="font-medium text-gray-700 px-2">Data Akun Pengguna (Orang Tua)</legend>
+        <div class="mt-4 space-y-4">
+          <div>
+            <label class="block text-sm text-gray-700">Nama Lengkap *</label>
+            <input type="text" name="nama_lengkap_user" required class="w-full mt-1 p-2 border border-gray-300 rounded">
+          </div>
+          <div>
+            <label class="block text-sm text-gray-700">Username *</label>
+            <input type="text" name="username" required class="w-full mt-1 p-2 border border-gray-300 rounded">
+          </div>
+          <div>
+            <label class="block text-sm text-gray-700">Email *</label>
+            <input type="email" name="email" required class="w-full mt-1 p-2 border border-gray-300 rounded">
+          </div>
+          <div>
+            <label class="block text-sm text-gray-700">Password *</label>
+            <input type="password" name="password" required class="w-full mt-1 p-2 border border-gray-300 rounded">
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="border border-gray-300 p-4 rounded">
+        <legend class="font-medium text-gray-700 px-2">Data Balita</legend>
+        <div class="mt-4 space-y-4">
+          <div>
+            <label class="block text-sm text-gray-700">Nama Balita *</label>
+            <input type="text" name="nama_balita" required class="w-full mt-1 p-2 border border-gray-300 rounded">
+          </div>
+          <div>
+            <label class="block text-sm text-gray-700">Tanggal Lahir *</label>
+            <input type="date" name="tanggal_lahir" required class="w-full mt-1 p-2 border border-gray-300 rounded">
+          </div>
+          <div>
+            <label class="block text-sm text-gray-700">Jenis Kelamin *</label>
+            <select name="jenis_kelamin" required class="w-full mt-1 p-2 border border-gray-300 rounded">
+              <option value="Laki-laki">Laki-laki</option>
+              <option value="Perempuan">Perempuan</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm text-gray-700">Alamat</label>
+            <textarea name="alamat" rows="3" class="w-full mt-1 p-2 border border-gray-300 rounded"></textarea>
+          </div>
+        </div>
+      </fieldset>
+>>>>>>> Stashed changes
+
+      <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 font-medium">Daftar</button>
+      <p class="text-sm text-center text-gray-600 mt-4">
+        Sudah punya akun? <a href="login.php" class="text-blue-600 hover:underline">Login di sini</a>
+      </p>
+    </form>
+  </div>
 </body>
 </html>

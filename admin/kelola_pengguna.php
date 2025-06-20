@@ -5,7 +5,10 @@ require '../config/database.php';
 $message = '';
 $error = '';
 
+<<<<<<< Updated upstream
 // Tambah pengguna
+=======
+>>>>>>> Stashed changes
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['tambah_user'])) {
     $username = mysqli_real_escape_string($koneksi, $_POST['username']);
     $email = mysqli_real_escape_string($koneksi, $_POST['email']);
@@ -39,6 +42,7 @@ $result_users = mysqli_query($koneksi, $query_users);
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+<<<<<<< Updated upstream
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Kelola Pengguna - Admin Dashboard</title>
   <link rel="stylesheet" href="../src/output.css">
@@ -80,10 +84,47 @@ $result_users = mysqli_query($koneksi, $query_users);
         <div>
           <label class="block text-sm font-medium text-gray-700">Role</label>
           <select name="role" class="w-full border border-gray-300 p-2 rounded mt-1" required>
+=======
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelola Pengguna - Admin</title>
+  <link rel="stylesheet" href="../src/output.css">
+</head>
+<body class="bg-gray-100 px-4 py-6">
+  <div class="max-w-6xl mx-auto bg-white p-6 rounded-lg shadow space-y-6">
+    <a href="dashboard_admin.php" class="text-blue-600 hover:underline">&larr; Kembali ke Dashboard Admin</a>
+    <h2 class="text-2xl font-bold text-gray-800">Kelola Pengguna</h2>
+
+    <?php if($message): ?><div class="bg-green-100 text-green-700 px-4 py-2 rounded text-sm"><?php echo $message; ?></div><?php endif; ?>
+    <?php if($error): ?><div class="bg-red-100 text-red-700 px-4 py-2 rounded text-sm"><?php echo $error; ?></div><?php endif; ?>
+
+    <fieldset class="border border-gray-300 p-4 rounded">
+      <legend class="text-lg font-semibold text-gray-700">Tambah Pengguna Baru</legend>
+      <form method="POST" class="space-y-4 mt-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-600">Nama Lengkap</label>
+          <input type="text" name="nama_lengkap_user" required class="w-full border border-gray-300 p-2 rounded mt-1">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-600">Username</label>
+          <input type="text" name="username" required class="w-full border border-gray-300 p-2 rounded mt-1">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-600">Email</label>
+          <input type="email" name="email" required class="w-full border border-gray-300 p-2 rounded mt-1">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-600">Password</label>
+          <input type="password" name="password" required class="w-full border border-gray-300 p-2 rounded mt-1">
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-600">Role</label>
+          <select name="role" required class="w-full border border-gray-300 p-2 rounded mt-1">
+>>>>>>> Stashed changes
             <option value="user">User</option>
             <option value="admin">Admin</option>
           </select>
         </div>
+<<<<<<< Updated upstream
         <button type="submit" name="tambah_user" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
           Tambah Pengguna
         </button>
@@ -106,16 +147,42 @@ $result_users = mysqli_query($koneksi, $query_users);
         </thead>
         <tbody class="divide-y divide-gray-100">
           <?php $nomor = 1; while($user = mysqli_fetch_assoc($result_users)): ?>
+=======
+        <button type="submit" name="tambah_user" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Tambah Pengguna</button>
+      </form>
+    </fieldset>
+
+    <div class="mt-6">
+      <h3 class="text-lg font-semibold text-gray-700 mb-3">Daftar Pengguna Terdaftar</h3>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm border border-gray-200 divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-4 py-2 text-left font-medium text-gray-600">No.</th>
+              <th class="px-4 py-2 text-left font-medium text-gray-600">Username</th>
+              <th class="px-4 py-2 text-left font-medium text-gray-600">Nama Lengkap</th>
+              <th class="px-4 py-2 text-left font-medium text-gray-600">Email</th>
+              <th class="px-4 py-2 text-left font-medium text-gray-600">Role</th>
+              <th class="px-4 py-2 text-left font-medium text-gray-600">Aksi</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <?php $nomor = 1; while($user = mysqli_fetch_assoc($result_users)): ?>
+>>>>>>> Stashed changes
             <tr class="bg-white hover:bg-gray-50">
               <td class="px-4 py-2"><?php echo $nomor++; ?></td>
               <td class="px-4 py-2"><?php echo htmlspecialchars($user['username']); ?></td>
               <td class="px-4 py-2"><?php echo htmlspecialchars($user['nama_lengkap_user']); ?></td>
               <td class="px-4 py-2"><?php echo htmlspecialchars($user['email']); ?></td>
               <td class="px-4 py-2">
+<<<<<<< Updated upstream
                 <span class="inline-block px-2 py-1 text-xs rounded 
                   <?php echo $user['role'] == 'admin' 
                       ? 'bg-red-500 text-white' 
                       : 'bg-blue-500 text-white'; ?>">
+=======
+                <span class="inline-block px-2 py-1 text-xs rounded <?php echo $user['role'] == 'admin' ? 'bg-red-500 text-white' : 'bg-blue-500 text-white'; ?>">
+>>>>>>> Stashed changes
                   <?php echo ucfirst($user['role']); ?>
                 </span>
               </td>
@@ -124,9 +191,16 @@ $result_users = mysqli_query($koneksi, $query_users);
                 <a href="#" class="hover:underline text-red-600">Delete</a>
               </td>
             </tr>
+<<<<<<< Updated upstream
           <?php endwhile; ?>
         </tbody>
       </table>
+=======
+            <?php endwhile; ?>
+          </tbody>
+        </table>
+      </div>
+>>>>>>> Stashed changes
     </div>
   </div>
 </body>

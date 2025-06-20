@@ -22,7 +22,10 @@ if (mysqli_num_rows($result_cek) == 0) {
     header("refresh:2;url=dashboard.php");
     exit();
 }
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 $data_balita = mysqli_fetch_assoc($result_cek);
 $nama_balita = $data_balita['nama_balita'];
 
@@ -37,6 +40,7 @@ $result_riwayat = mysqli_query($koneksi, $query_riwayat);
 <html lang="id">
 <head>
   <meta charset="UTF-8">
+<<<<<<< Updated upstream
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Riwayat Diagnosis - <?php echo htmlspecialchars($nama_balita); ?></title>
   <link rel="stylesheet" href="src/output.css">
@@ -91,5 +95,50 @@ $result_riwayat = mysqli_query($koneksi, $query_riwayat);
     <?php endif; ?>
   </div>
 
+=======
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Riwayat Diagnosis - <?php echo htmlspecialchars($nama_balita); ?></title>
+  <link href="src/output.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 py-8 px-4">
+  <div class="max-w-4xl mx-auto bg-white p-6 rounded-lg shadow-md">
+    <h2 class="text-2xl font-bold text-gray-800">Riwayat Diagnosis</h2>
+    <h3 class="text-lg text-gray-700 mb-4">Untuk Balita: <?php echo htmlspecialchars($nama_balita); ?></h3>
+    <a href="dashboard.php" class="inline-block mb-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">&larr; Kembali ke Dashboard</a>
+
+    <?php if (mysqli_num_rows($result_riwayat) > 0): ?>
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm border border-gray-300 divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-4 py-2 text-left font-semibold text-gray-600">No.</th>
+              <th class="px-4 py-2 text-left font-semibold text-gray-600">Tanggal Diagnosis</th>
+              <th class="px-4 py-2 text-left font-semibold text-gray-600">Usia Saat Diagnosis</th>
+              <th class="px-4 py-2 text-left font-semibold text-gray-600">Hasil Diagnosis</th>
+              <th class="px-4 py-2 text-left font-semibold text-gray-600">Aksi</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <?php $nomor = 1; while ($riwayat = mysqli_fetch_assoc($result_riwayat)): ?>
+              <tr class="hover:bg-gray-50">
+                <td class="px-4 py-2"><?php echo $nomor++; ?></td>
+                <td class="px-4 py-2"><?php echo date('d F Y, H:i', strtotime($riwayat['tanggal_diagnosis'])); ?></td>
+                <td class="px-4 py-2"><?php echo $riwayat['catatan_usia_saat_diagnosis']; ?> bulan</td>
+                <td class="px-4 py-2"><?php echo htmlspecialchars($riwayat['kesimpulan_akhir']); ?></td>
+                <td class="px-4 py-2">
+                  <a href="detail_diagnosis.php?id_hasil=<?php echo $riwayat['id_hasil']; ?>" class="bg-blue-600 text-white px-3 py-1 rounded text-sm hover:bg-blue-700">Lihat Detail</a>
+                </td>
+              </tr>
+            <?php endwhile; ?>
+          </tbody>
+        </table>
+      </div>
+    <?php else: ?>
+      <div class="bg-yellow-100 border border-yellow-300 text-yellow-800 px-4 py-3 rounded mt-4 text-center">
+        Belum ada riwayat diagnosis untuk balita ini.
+      </div>
+    <?php endif; ?>
+  </div>
+>>>>>>> Stashed changes
 </body>
 </html>
