@@ -82,10 +82,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <a href="register.php" class="text-blue-600 hover:underline">Daftar di sini</a>
         </p>
     </div>
-
-    <p class="text-sm text-center text-gray-600 mt-4">
-      Belum punya akun? <a href="register.php" class="text-blue-600 hover:underline">Daftar di sini</a>
-    </p>
   </div>
 </body>
 </html>
