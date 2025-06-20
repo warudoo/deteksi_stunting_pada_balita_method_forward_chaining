@@ -4,10 +4,6 @@
     "tailwindcss": "^4.1.10"
   },
   "scripts": {
-<<<<<<< Updated upstream
   "dev": "tailwindcss -i ./src/input.css -o ./src/output.css --watch"
-=======
-    "dev": "tailwindcss -i ./src/input.css -o ./src/output.css --watch"
->>>>>>> Stashed changes
   }
 }

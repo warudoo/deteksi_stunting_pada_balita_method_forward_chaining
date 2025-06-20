@@ -51,18 +51,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $result_pertanyaan = mysqli_query($koneksi, "SELECT * FROM pertanyaan ORDER BY kode_gejala ASC");
-<<<<<<< Updated upstream
 $result_aturan = mysqli_query($koneksi, "SELECT * FROM aturan ORDER BY id_aturan ASC");
-=======
-$result_aturan = mysqli_query($koneksi, "SELECT * FROM aturan ORDER BY kode_aturan ASC");
->>>>>>> Stashed changes
 ?>
 
 <!DOCTYPE html>
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-<<<<<<< Updated upstream
   <title>Kelola Aturan & Pertanyaan - Admin</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../src/output.css" rel="stylesheet">
@@ -153,92 +148,11 @@ $result_aturan = mysqli_query($koneksi, "SELECT * FROM aturan ORDER BY kode_atur
         </thead>
         <tbody class="divide-y">
           <?php while($a = mysqli_fetch_assoc($result_aturan)): ?>
-=======
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kelola Aturan & Pertanyaan</title>
-  <link href="../src/output.css" rel="stylesheet">
-</head>
-<body class="bg-gray-100 min-h-screen px-4 py-6">
-  <div class="max-w-6xl mx-auto space-y-8">
-    <a href="dashboard_admin.php" class="text-blue-600 hover:underline">&larr; Kembali ke Dashboard Admin</a>
-    <h1 class="text-2xl font-bold text-gray-800">Kelola Aturan & Pertanyaan</h1>
-    <p class="text-gray-600 mb-4">Ubah basis pengetahuan untuk sistem diagnosis.</p>
-
-    <?php if($message): ?><div class="bg-green-100 text-green-800 px-4 py-2 rounded"><?php echo $message; ?></div><?php endif; ?>
-    <?php if($error): ?><div class="bg-red-100 text-red-800 px-4 py-2 rounded"><?php echo $error; ?></div><?php endif; ?>
-
-    <!-- Pertanyaan -->
-    <section class="bg-white p-6 rounded shadow">
-      <h2 class="text-xl font-semibold text-gray-700 mb-4">Manajemen Pertanyaan (Gejala)</h2>
-      <form method="POST" class="space-y-4">
-        <input type="hidden" name="tambah_pertanyaan" value="1">
-        <div>
-          <label class="block text-sm font-medium text-gray-600">Kode Gejala</label>
-          <input type="text" name="kode_gejala" required class="w-full border px-3 py-2 rounded">
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-600">Teks Pertanyaan</label>
-          <textarea name="teks_pertanyaan" rows="2" required class="w-full border px-3 py-2 rounded"></textarea>
-        </div>
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Tambah Pertanyaan</button>
-      </form>
-
-      <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">Daftar Pertanyaan</h3>
-      <table class="w-full border text-sm">
-        <thead class="bg-gray-100">
-          <tr><th class="px-4 py-2">Kode</th><th class="px-4 py-2">Teks Pertanyaan</th><th class="px-4 py-2">Aksi</th></tr>
-        </thead>
-        <tbody class="divide-y">
-        <?php while($p = mysqli_fetch_assoc($result_pertanyaan)): ?>
-          <tr>
-            <td class="px-4 py-2"><?php echo htmlspecialchars($p['kode_gejala']); ?></td>
-            <td class="px-4 py-2"><?php echo htmlspecialchars($p['teks_pertanyaan']); ?></td>
-            <td class="px-4 py-2">
-              <form method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
-                <input type="hidden" name="id_pertanyaan" value="<?php echo $p['id_pertanyaan']; ?>">
-                <button name="hapus_pertanyaan" class="bg-red-600 text-white px-3 py-1 text-sm rounded hover:bg-red-700">Hapus</button>
-              </form>
-            </td>
-          </tr>
-        <?php endwhile; ?>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Aturan -->
-    <section class="bg-white p-6 rounded shadow">
-      <h2 class="text-xl font-semibold text-gray-700 mb-4">Manajemen Aturan</h2>
-      <form method="POST" class="space-y-4">
-        <input type="hidden" name="tambah_aturan" value="1">
-        <div>
-          <label class="block text-sm font-medium text-gray-600">Kode Aturan</label>
-          <input type="text" name="kode_aturan" required class="w-full border px-3 py-2 rounded">
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-600">Kondisi (IF)</label>
-          <input type="text" name="kondisi" required class="w-full border px-3 py-2 rounded">
-        </div>
-        <div>
-          <label class="block text-sm font-medium text-gray-600">Kesimpulan (THEN)</label>
-          <input type="text" name="kesimpulan" required class="w-full border px-3 py-2 rounded">
-        </div>
-        <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Tambah Aturan</button>
-      </form>
-
-      <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">Daftar Aturan</h3>
-      <table class="w-full border text-sm">
-        <thead class="bg-gray-100">
-          <tr><th class="px-4 py-2">Kode</th><th class="px-4 py-2">Kondisi</th><th class="px-4 py-2">Kesimpulan</th><th class="px-4 py-2">Aksi</th></tr>
-        </thead>
-        <tbody class="divide-y">
-        <?php while($a = mysqli_fetch_assoc($result_aturan)): ?>
->>>>>>> Stashed changes
           <tr>
             <td class="px-4 py-2"><?php echo htmlspecialchars($a['kode_aturan']); ?></td>
             <td class="px-4 py-2"><?php echo htmlspecialchars($a['kondisi']); ?></td>
             <td class="px-4 py-2"><?php echo htmlspecialchars($a['kesimpulan']); ?></td>
             <td class="px-4 py-2">
-<<<<<<< Updated upstream
               <form method="POST" onsubmit="return confirm('Yakin ingin menghapus aturan ini?')">
                 <input type="hidden" name="id_aturan" value="<?php echo $a['id_aturan']; ?>">
                 <button type="submit" name="hapus_aturan" class="bg-red-600 text-white px-3 py-1 rounded text-sm hover:bg-red-700">Hapus</button>
@@ -246,22 +160,9 @@ $result_aturan = mysqli_query($koneksi, "SELECT * FROM aturan ORDER BY kode_atur
             </td>
           </tr>
           <?php endwhile; ?>
-=======
-              <form method="POST" onsubmit="return confirm('Yakin ingin menghapus?')">
-                <input type="hidden" name="id_aturan" value="<?php echo $a['id_aturan']; ?>">
-                <button name="hapus_aturan" class="bg-red-600 text-white px-3 py-1 text-sm rounded hover:bg-red-700">Hapus</button>
-              </form>
-            </td>
-          </tr>
-        <?php endwhile; ?>
->>>>>>> Stashed changes
         </tbody>
       </table>
     </section>
   </div>
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 </body>
 </html>

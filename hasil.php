@@ -2,7 +2,6 @@
 session_start();
 require 'config/database.php';
 
-<<<<<<< Updated upstream
 if (!isset($_SESSION['id_user'])) {
     header("Location: login.php");
     exit();
@@ -11,10 +10,6 @@ if (!isset($_GET['id_hasil'])) {
     header("Location: dashboard.php");
     exit();
 }
-=======
-if (!isset($_SESSION['id_user'])) { header("Location: login.php"); exit(); }
-if (!isset($_GET['id_hasil'])) { header("Location: dashboard.php"); exit(); }
->>>>>>> Stashed changes
 
 $id_hasil = (int)$_GET['id_hasil'];
 $id_user = $_SESSION['id_user'];

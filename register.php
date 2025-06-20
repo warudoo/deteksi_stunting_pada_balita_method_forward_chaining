@@ -37,11 +37,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
             } else {
                 mysqli_rollback($koneksi);
-<<<<<<< Updated upstream
                 if (mysqli_errno($koneksi) == 1062) {
-=======
-                if(mysqli_errno($koneksi) == 1062) {
->>>>>>> Stashed changes
                     $error = "Username atau Email sudah terdaftar. Silakan gunakan yang lain.";
                 } else {
                     $error = "Terjadi kesalahan saat mendaftarkan user: " . mysqli_error($koneksi);
@@ -51,10 +47,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             mysqli_rollback($koneksi);
             $error = "Terjadi kesalahan pada database: " . $e->getMessage();
         }
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
         mysqli_close($koneksi);
     }
 }
